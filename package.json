@@ -1,15 +1,15 @@
 {
   "name": "mp-event",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple event subscription publishing system implementation for miniprogram",
   "main": "index.js",
   "scripts": {
-    "test": "node test/index.js",
+    "test": "mocha --require ts-node/register test/**/*.{ts,tsx}",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "fix": "tslint -c tslint.json 'src/**/*.ts' --fix",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "build": "npm run type-check&&npm run lint&&webpack",
+    "build": "npm run type-check&&npm run fix&&webpack",
     "pack": "npm run build&&npm pack"
   },
   "keywords": [
@@ -23,11 +23,23 @@
     "url": "https://github.com/fishen/mp-event.git"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.5",
+    "@types/chai-as-promised": "^7.1.2",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "dts-bundle-webpack": "^1.0.2",
+    "mocha": "^6.2.2",
+    "reflect-metadata": "^0.1.13",
     "ts-loader": "^6.0.4",
-    "tslint": "^5.19.0",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
     "typescript": "^3.5.3",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.7",
+    "webpack": "^4.35.3",
+    "webpack-cli": "^3.3.6",
     "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "tslib": "^1.10.0"
   }
 }

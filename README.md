@@ -7,9 +7,8 @@ A simple event subscription publishing system implementation
 
 # Getting started
 
-```
-// import * as event from 'mp-event';
-const event = require('mp-event');
+```ts
+import { event } from 'mp-event';
 
 const eventName = Symbol();
 event.on(eventName, console.log);
@@ -32,7 +31,7 @@ Register an event subscription
 * * target(optional, object): the value to be passed as the ***this*** parameter to the target function when the callback function is called.
 * * once(optional, boolean): whether the event is called only once.
 * * unique(optional, boolean): register a unique callback function by event name and target.
-```
+```ts
 const event = require('mp-event');
 
 const eventName = Symbol();
@@ -52,7 +51,7 @@ Register an event subscription, but only be triggered once.
 * * target: the value to be passed as the this parameter to the target function when the callback function is called.
 * * unique(boolean): register a unique callback function by event name and target.
 ***
-```
+```ts
 const event = require('mp-event');
 
 const eventName = Symbol();
@@ -68,7 +67,7 @@ Trigger event by name and data.
 * **name**: event name. 
 * **data**: event data pass to the callback functions.
 ***
-```
+```ts
 const event = require('mp-event');
 
 const eventName = Symbol();
@@ -83,7 +82,7 @@ Cancel event subscription by name and target, the current operation will compare
 * **name**: event name. 
 * **options**: subscription options.
 * * target: the value to be passed as the ***this*** parameter to the target function when the callback function is called.
-```
+```ts
 // remove all subscriptions which name equals to "eventName" and the target is undefined.
 event.off('eventName');
 
@@ -96,9 +95,54 @@ event.off('eventName', { target: obj });
 Clear subscriptions by event name
 * **name**: event name. 
 * **clearAllIfNameIsNil**: whether clear all subscriptions if event name is null or undefined.
-```
+```ts
 // remove all subscriptions which name equals to "eventName"
 event.off('eventName');
 // remove all subscriptions;
 event.off(null, true);
 ```
+# Decorators
+## bindEvent(options?: string| symbol | object)
+Bind the current method as a callback function for the specified event
+*  name(string|symbol, optional): event name, default use current method name.
+*  deferred(boolean, optional): whether to delay execution to the specified lifetime, such as 'onShow'.
+*  once(boolean, optional): whether to trigger only once.
+*  global(boolean, optional): whether to register as a global event.
+## event(options?: object)
+Register events
+*  onLifetime(string, optional): the lifetime for initializing events.
+*  deferralLifetime(string, optional): the lifetime for deferring events.
+*  offLifetime(string, optional): the lifetime for destroying events.
+```ts
+import { event, bindEvent } from 'mp-event';
+import { Page, page } from 'wxa-core';
+
+@page()
+@event()
+export default class extends Page{
+    @bindEvent()
+    callback(){
+        //do something
+    }
+}
+```
+###  Config Global Event Options
+Global event options can be set by binding Page or Component's prototype properties in entry file.
+```ts
+//app.ts
+import { event, bindEvent, EVENT_OPTIONS } from 'mp-event';
+import { Page, page, Component, component } from 'wxa-core';
+
+Page.prototype.EVENT_OPTIONS={
+    onLifetime: 'onLoad',
+    offLifetime: 'onUnload',
+    deferralLifetime: 'onShow'
+};
+
+Component.prototype.EVENT_OPTIONS={
+    onLifetime: 'attached',
+    offLifetime: 'detached',
+    deferralLifetime: 'show'
+};
+```
+

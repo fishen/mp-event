@@ -1,5 +1,6 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const DtsBundleWebpack = require('dts-bundle-webpack');
 
 module.exports = {
     mode: 'production',
@@ -9,6 +10,14 @@ module.exports = {
     module: {
         rules: [{ test: /\.ts(x?)$/, loader: "ts-loader" }]
     },
+    plugins: [
+        new DtsBundleWebpack({
+            name: 'mp-event',
+            main: 'src/index.d.ts',
+            out: "~/index.d.ts",
+            removeSource: true,
+        })
+    ],
     resolve: {
         extensions: ['.ts']
     },

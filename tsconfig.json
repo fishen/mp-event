@@ -8,10 +8,10 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es5",
-    "declarationDir": ".",
     "declaration": true,
     "allowJs": false,
     "checkJs": false,
+    "importHelpers": true,
     "downlevelIteration": true,
     "typeRoots": [
       "typings"
@@ -22,13 +22,14 @@
     ]
   },
   "include": [
-    "**/*.ts",
+    "src/**/*.ts",
+    "test/**/*.ts"
   ],
   "exclude": [
     "dist",
     "typings",
     "node_modules",
     "**/*.spec.ts",
-    "**/*.d.ts"
+    "**/*/*.d.ts"
   ]
 }
