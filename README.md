@@ -109,7 +109,7 @@ Bind the current method as a callback function for the specified event
 *  once(boolean, optional): whether to trigger only once.
 *  global(boolean, optional): whether to register as a global event.
 ## event(options?: object)
-Register events
+Register events and automatically unbind events when the page or component is destroyed.
 *  onLifetime(string, optional): the lifetime for initializing events.
 *  deferralLifetime(string, optional): the lifetime for deferring events.
 *  offLifetime(string, optional): the lifetime for destroying events.
@@ -133,13 +133,13 @@ Global event options can be set by binding Page or Component's prototype propert
 import { event, bindEvent, EVENT_OPTIONS } from 'mp-event';
 import { Page, page, Component, component } from 'wxa-core';
 
-Page.prototype.EVENT_OPTIONS={
+Page.prototype[EVENT_OPTIONS]={
     onLifetime: 'onLoad',
     offLifetime: 'onUnload',
     deferralLifetime: 'onShow'
 };
 
-Component.prototype.EVENT_OPTIONS={
+Component.prototype[EVENT_OPTIONS]={
     onLifetime: 'attached',
     offLifetime: 'detached',
     deferralLifetime: 'show'

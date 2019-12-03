@@ -10,7 +10,7 @@ function getOptions(prototype: any, options?: IEventOptions) {
 }
 
 /**
- * Register events
+ * Register events and automatically unbind events when the page is destroyed.
  * @param options event options
  */
 export function event(options?: IEventOptions) {

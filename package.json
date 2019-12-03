@@ -1,6 +1,6 @@
 {
   "name": "mp-event",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple event subscription publishing system implementation for miniprogram",
   "main": "index.js",
   "scripts": {
