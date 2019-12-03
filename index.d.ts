@@ -10,7 +10,7 @@ declare module 'mp-event/decoraters' {
     import * as evt from "mp-event/events";
     import { EventName, IBindEventOptions, IEventOptions } from "mp-event/type";
     /**
-        * Register events
+        * Register events and automatically unbind events when the page is destroyed.
         * @param options event options
         */
     export function event(options?: IEventOptions): (constructor: any) => void;

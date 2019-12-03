@@ -345,7 +345,7 @@ function getOptions(prototype, options) {
     return Object.assign(defaultConfig, prototype[constants_1.EVENT_OPTIONS], options);
 }
 /**
- * Register events
+ * Register events and automatically unbind events when the page is destroyed.
  * @param options event options
  */
 function event(options) {
