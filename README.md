@@ -130,19 +130,19 @@ export default class extends Page{
 Global event options can be set by binding Page or Component's prototype properties in entry file.
 ```ts
 //app.ts
-import { event, bindEvent, EVENT_OPTIONS } from 'mp-event';
-import { Page, page, Component, component } from 'wxa-core';
+import { event } from 'mp-event';
+import { Page, Component } from 'wxa-core';
 
-Page.prototype[EVENT_OPTIONS]={
+event.config({
     onLifetime: 'onLoad',
     offLifetime: 'onUnload',
     deferralLifetime: 'onShow'
-};
+}, Page);
 
-Component.prototype[EVENT_OPTIONS]={
+event.config({
     onLifetime: 'attached',
     offLifetime: 'detached',
     deferralLifetime: 'show'
-};
+}, Component);
 ```
 

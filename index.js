@@ -340,10 +340,7 @@ var tslib_1 = __webpack_require__(0);
 var constants_1 = __webpack_require__(3);
 var event_manager_1 = __webpack_require__(7);
 var evt = tslib_1.__importStar(__webpack_require__(5));
-function getOptions(prototype, options) {
-    var defaultConfig = { onLifetime: "onLoad", deferralLifetime: "onShow", offLifetime: "onUnload" };
-    return Object.assign(defaultConfig, prototype[constants_1.EVENT_OPTIONS], options);
-}
+var defaultConfig = { onLifetime: "onLoad", deferralLifetime: "onShow", offLifetime: "onUnload" };
 /**
  * Register events and automatically unbind events when the page is destroyed.
  * @param options event options
@@ -351,7 +348,7 @@ function getOptions(prototype, options) {
 function event(options) {
     return function (constructor) {
         var prototype = constructor.prototype;
-        options = getOptions(prototype, options);
+        options = Object.assign({}, defaultConfig, prototype[constants_1.EVENT_OPTIONS], options);
         event_manager_1.EventManager.from(prototype).register(prototype, options);
     };
 }
@@ -361,6 +358,19 @@ event.off = evt.off;
 event.once = evt.once;
 event.emit = evt.emit;
 event.clear = evt.clear;
+/**
+ * Config global event options.
+ * @param options: Event options.
+ * @param target: Event target.
+ */
+event.config = function (options, target) {
+    if (typeof target === "function") {
+        target.prototype[constants_1.EVENT_OPTIONS] = options;
+    }
+    else {
+        Object.assign(defaultConfig, options);
+    }
+};
 /**
  * Bind the current method as a callback function for the specified event
  * @param options event options

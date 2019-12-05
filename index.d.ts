@@ -20,6 +20,7 @@ declare module 'mp-event/decoraters' {
             var once: typeof evt.once;
             var emit: typeof evt.emit;
             var clear: typeof evt.clear;
+            var config: (options: IEventOptions, target?: any) => void;
     }
     /**
         * Bind the current method as a callback function for the specified event

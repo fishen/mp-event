@@ -13,9 +13,8 @@ module.exports = {
     plugins: [
         new DtsBundleWebpack({
             name: 'mp-event',
-            main: 'src/index.d.ts',
+            main: 'dts/src/index.d.ts',
             out: "~/index.d.ts",
-            removeSource: true,
         })
     ],
     resolve: {

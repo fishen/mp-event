@@ -1,6 +1,6 @@
 {
   "name": "mp-event",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "A simple event subscription publishing system implementation for miniprogram",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "fix": "tslint -c tslint.json 'src/**/*.ts' --fix",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "build": "npm run type-check&&npm run fix&&webpack",
+    "build": "npm run type-check&&npm run fix&&webpack&& rm -rf dts",
     "pack": "npm run build&&npm pack"
   },
   "keywords": [

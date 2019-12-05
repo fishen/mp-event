@@ -9,6 +9,7 @@
     "module": "commonjs",
     "target": "es5",
     "declaration": true,
+    "declarationDir": "dts",
     "allowJs": false,
     "checkJs": false,
     "importHelpers": true,
